@@ -1,9 +1,12 @@
 # KindlePicStitch
-To stitch the azw downloaded from Kindle through calibre converted images.
+To stitch the *.azw* files downloaded from Kindle through Calibre converted images.
 
-![IMG_0_sample](https://raw.githubusercontent.com/0180akusa/KindlePicStitch/2c044c99f89b98d7c792781fc741c2d0eac0648b/0_sample.jpg)
+![IMG_0_sample](/0_sample.jpg1)
 
-## GET azw from Kindle
-### Download KindleForPC-installer.exe before version 1.40
+## GET *.azw* from Kindle
+### 1. Downloa Kindle
+Downloa [KindleForPC-installer.exe](/Software) before version 1.24.51068
 
-### Preventing Kindle Automatic Updates
+SHA-256:**c7a1a93763d102bca0fed9c16799789ae18c3322b1b3bdfbe8c00422c32f83d7**
+
+### 2. Preventing Kindle Automatic Updates
