@@ -24,3 +24,9 @@ Copy the **hosts** file to the `desktop` and add a line at the end of the file:
 127.0.0.1   kindleforpc.s3.amazonaws.com
 ``` 
 Replace the original **hosts** file with the edited **hosts** file.
+
+Disable the use of new `KFX/KCR` formats, run this command:
+``` console
+ren $env:localappdata\Amazon\Kindle\application\renderer-test.exe renderer-test.xxx
+
+```
