@@ -39,5 +39,26 @@ Or run this command in `CMD`:
 ```console
 ren %localappdata%\Amazon\Kindle\application\renderer-test.exe renderer-test.xxx
 ```
+### 4. Check the download files
 
+Buy a Kindle eBook on Amazon's local site, login on KindleforPC.
 
+Right-click the corresponding book and click Download.
+
+You can find the downloaded book in `Document\My Kindle`, where the `.azw` or `.azw3` files in folders named ASIN.
+
+## Convert to images
+
+### 1. Download and install the [Calibre](https://calibre-ebook.com/ja/download_windows) from the website.
+
+### 2. Download the latest version [plug-in](https://github.com/noDRM/DeDRM_tools/releases/tag/v10.0.3).
+
+### 3. Import Kindle books
+
+Click and drag `.azw` file into Calibre.
+
+Select the book and click `convert format`, you can convert the book to any format including `zip`, `epub`.
+
+### 4. Get images
+
+Extract the `zip` and you can find all the `jpeg` images contained in the `images` folder.
