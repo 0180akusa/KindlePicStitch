@@ -58,7 +58,7 @@ Buy a Kindle eBook on Amazon's local site, login on KindleforPC.
 
 Right-click the corresponding book and click Download.
 
-You can find the downloaded book in `Document\My Kindle`, where the `.azw` or `.azw3` files in folders named ASIN.
+You can find the downloaded book in `C:\Users\@yourusername\Documents\My Kindle Content\`, where the `.azw` or `.azw3` files in folders named ASIN.
 
 ## Convert to images
 
