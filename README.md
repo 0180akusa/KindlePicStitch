@@ -16,6 +16,7 @@ certutil -hashfile KindleForPC-installer-1.24.51068.exe SHA256
 ```
 
 ### 2. Preventing Kindle Automatic Updates
+
 Find the **hosts** file located in the `C:\Windows\System32\drivers\etc` folder.
 
 Copy the **hosts** file to the `desktop` and add a line at the end of the file:
@@ -25,8 +26,18 @@ Copy the **hosts** file to the `desktop` and add a line at the end of the file:
 ``` 
 Replace the original **hosts** file with the edited **hosts** file.
 
-Disable the use of new `KFX/KCR` formats, run this command:
+Cancel automatic updates and close the KindleforPC.
+
+### 3. Make sure the download format is `.azw` 
+
+Disable the use of new `KFX/KCR` formats, run this command in `Windows PowerShell`:
 ``` console
 ren $env:localappdata\Amazon\Kindle\application\renderer-test.exe renderer-test.xxx
-
 ```
+
+Or run this command in `CMD`:
+```console
+ren %localappdata%\Amazon\Kindle\application\renderer-test.exe renderer-test.xxx
+```
+
+
