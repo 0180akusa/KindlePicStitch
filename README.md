@@ -1,4 +1,17 @@
-# KindlePicStitch
+<h1 align="center">KindlePicStitch</h1>
+
+<p align="center">
+<a href="README_CN.md"><img src="https://img.shields.io/badge/文档-中文版-81001E.svg" alt="CN doc"></a>
+<a href="README.md"><img src="https://img.shields.io/badge/document-English-002FA7.svg" alt="EN doc"></a>
+</p>
+
+## Support me
+<div align="center">
+  <a href="https://www.buymeacoffee.com/asuka0810"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-9e3eb2?style=for-the-badge&logo=buy-me-a-coffee&logoColor=fff" alt="BuyMeACoffe"></a>
+  <a href="https://afdian.net/a/asuka0810"><img src="https://img.shields.io/badge/🐳爱发电-Support Me-9e3eb2?style=for-the-badge&logoColor=fff" alt="BuyMeACola"></a>
+</div>
+
+
 To stitch the `.azw` files downloaded from Kindle through [Calibre](https://calibre-ebook.com/ja/download_windows) converted images.
 
 ![IMG_0_sample](/0_sample.jpg1)
@@ -62,3 +75,5 @@ Select the book and click `convert format`, you can convert the book to any form
 ### 4. Get images
 
 Extract the `zip` and you can find all the `jpeg` images contained in the `images` folder.
+
+## Drag any images and stitch them together. 
