@@ -14,7 +14,7 @@
 
 To stitch the `.azw` files downloaded from Kindle through [Calibre](https://calibre-ebook.com/ja/download_windows) converted images.
 
-![IMG_0_sample](/0_sample.jpg1)
+![IMG_0_sample](/0_sample.jpg)
 
 ## GET `.azw` from Kindle
 
@@ -65,6 +65,8 @@ You can find the downloaded book in `Document\My Kindle`, where the `.azw` or `.
 ### 1. Download and install the [Calibre](https://calibre-ebook.com/ja/download_windows) from the website.
 
 ### 2. Download the latest version [plug-in](https://github.com/noDRM/DeDRM_tools/releases/tag/v10.0.3).
+
+![IMG_0_sample](/plug-in.jpg1)
 
 ### 3. Import Kindle books
 
