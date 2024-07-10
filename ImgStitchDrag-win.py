@@ -44,23 +44,39 @@ class ImageStitcherApp:
         self.instruction_label = ttk.Label(main_frame, text="Drag and drop up to 2 images here", anchor="center")
         self.instruction_label.pack(fill="x", pady=10)
 
+        # Styple for Button
+        style = ttk.Style()
+        style.theme_use('clam')
+
+        # Styple for ButtonNo1
+        style.configure('ButtonNo1.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#310047')
+        style.map('ButtonNo1.TButton',background=[('active','#81001E')])
+
+        # Styple for ButtonNo2
+        style.configure('ButtonNo2.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#660094')
+        style.map('ButtonNo2.TButton',background=[('active','#81001E')])
+
+        # Styple for ButtonNo3
+        style.configure('ButtonNo3.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#9614D0')
+        style.map('ButtonNo3.TButton',background=[('active','#81001E')])
+
         # Frame for Add Images button and checkbox
         control_frame = ttk.Frame(main_frame)
         control_frame.pack(fill="x", pady=10)
 
         # Add Images button
-        add_button = ttk.Button(control_frame, text="Add Images", command=self.add_images)
+        add_button = ttk.Button(control_frame, text="Add Images", style='ButtonNo3.TButton', command=self.add_images)
         add_button.pack(side=tk.LEFT, padx=(width//4, 10))
 
         # Checkbox for descending order
         ttk.Checkbutton(control_frame, text="Right to Left", variable=self.desc_order, command=self.reorder_images).pack(side=tk.LEFT)
 
         # Stitch Images button
-        stitch_button = ttk.Button(main_frame, text="Stitch Images", command=self.stitch_images)
+        stitch_button = ttk.Button(main_frame, text="Stitch Images", style='ButtonNo2.TButton', command=self.stitch_images)
         stitch_button.pack(fill="x", padx=width//4, pady=10)
 
         # Clear Images button
-        clear_button = ttk.Button(main_frame, text="Clear Images", command=self.clear_images)
+        clear_button = ttk.Button(main_frame, text="Clear Images", style='ButtonNo1.TButton', command=self.clear_images)
         clear_button.pack(fill="x", padx=width//4, pady=10)
 
     def drop_images(self, event):
