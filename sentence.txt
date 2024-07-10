@@ -1,0 +1,9 @@
+# usually
+pyinstaller --onefile --windowed ImgStitchDrag-win.py
+
+# keep spec
+pyinstaller ImgStitchDrag-win.spec
+
+# hooks
+pyinstaller --additional-hooks-dir=. --onefile --windowed ImgStitchDrag-win.py
+
