@@ -6,6 +6,8 @@ import os
 import re
 import shutil
 
+foutput_dir = r"D:\FFOutput"
+
 class ImageStitcherApp:
     def __init__(self, root):
         self.root = root
@@ -49,23 +51,27 @@ class ImageStitcherApp:
         style.theme_use('clam')
 
         # Styple for ButtonNo1
-        style.configure('ButtonNo1.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#310047')
+        style.configure('ButtonNo1.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#A7C7E7')
         style.map('ButtonNo1.TButton',background=[('active','#81001E')])
 
         # Styple for ButtonNo2
-        style.configure('ButtonNo2.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#660094')
+        style.configure('ButtonNo2.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#00509E')
         style.map('ButtonNo2.TButton',background=[('active','#81001E')])
 
         # Styple for ButtonNo3
-        style.configure('ButtonNo3.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#9614D0')
+        style.configure('ButtonNo3.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#B9E3C6')
         style.map('ButtonNo3.TButton',background=[('active','#81001E')])
+
+        # Styple for ButtonNo4
+        style.configure('ButtonNo4.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#007A33')
+        style.map('ButtonNo4.TButton',background=[('active','#81001E')])
 
         # Frame for Add Images button and checkbox
         control_frame = ttk.Frame(main_frame)
         control_frame.pack(fill="x", pady=10)
 
         # Add Images button
-        add_button = ttk.Button(control_frame, text="Add Images", style='ButtonNo3.TButton', command=self.add_images)
+        add_button = ttk.Button(control_frame, text="Add Images", style='ButtonNo1.TButton', command=self.add_images)
         add_button.pack(side=tk.LEFT, padx=(width//4, 10))
 
         # Checkbox for descending order
@@ -75,8 +81,12 @@ class ImageStitcherApp:
         stitch_button = ttk.Button(main_frame, text="Stitch Images", style='ButtonNo2.TButton', command=self.stitch_images)
         stitch_button.pack(fill="x", padx=width//4, pady=10)
 
+        # Pack Images to digital button
+        stitch_button = ttk.Button(main_frame, text="Pack FFOutput", style='ButtonNo3.TButton', command=self.pack_FFOutput)
+        stitch_button.pack(fill="x", padx=width//4, pady=10)
+
         # Clear Images button
-        clear_button = ttk.Button(main_frame, text="Clear Images", style='ButtonNo1.TButton', command=self.clear_images)
+        clear_button = ttk.Button(main_frame, text="Clear Images", style='ButtonNo4.TButton', command=self.clear_images)
         clear_button.pack(fill="x", padx=width//4, pady=10)
 
     def drop_images(self, event):
@@ -137,6 +147,23 @@ class ImageStitcherApp:
             self.instruction_label.config(text="1 image added. Drag and drop 1 more image here")
         else:
             self.instruction_label.config(text="2 images added. Ready to stitch!")
+    
+    def pack_FFOutput(self):
+        global foutput_dir
+        target_dir = os.path.join(foutput_dir, "digital")
+        os.makedirs(target_dir, exist_ok=True)
+
+        # Move all items except the target directory itself
+        for item in os.listdir(foutput_dir):
+            source_item = os.path.join(foutput_dir, item)
+            target_item = os.path.join(target_dir, item)
+
+            if os.path.isdir(source_item) and source_item != target_dir:
+                shutil.move(source_item, target_item)
+            elif os.path.isfile(source_item):
+                shutil.move(source_item, target_item)
+
+        messagebox.showinfo("Completed", f"All files have been moved to {target_dir}")
 
     def clear_images(self):
         self.image_paths = []
