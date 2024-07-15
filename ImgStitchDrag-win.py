@@ -51,19 +51,19 @@ class ImageStitcherApp:
         style.theme_use('clam')
 
         # Styple for ButtonNo1
-        style.configure('ButtonNo1.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#A7C7E7')
+        style.configure('ButtonNo1.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#5fa8cc')
         style.map('ButtonNo1.TButton',background=[('active','#81001E')])
 
         # Styple for ButtonNo2
-        style.configure('ButtonNo2.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#00509E')
+        style.configure('ButtonNo2.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#449a7f')
         style.map('ButtonNo2.TButton',background=[('active','#81001E')])
 
         # Styple for ButtonNo3
-        style.configure('ButtonNo3.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#B9E3C6')
+        style.configure('ButtonNo3.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#266047')
         style.map('ButtonNo3.TButton',background=[('active','#81001E')])
 
         # Styple for ButtonNo4
-        style.configure('ButtonNo4.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#007A33')
+        style.configure('ButtonNo4.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#10411a')
         style.map('ButtonNo4.TButton',background=[('active','#81001E')])
 
         # Frame for Add Images button and checkbox
@@ -71,22 +71,22 @@ class ImageStitcherApp:
         control_frame.pack(fill="x", pady=10)
 
         # Add Images button
-        add_button = ttk.Button(control_frame, text="Add Images", style='ButtonNo1.TButton', command=self.add_images)
+        add_button = ttk.Button(control_frame, text="Add images", style='ButtonNo1.TButton', command=self.add_images)
         add_button.pack(side=tk.LEFT, padx=(width//4, 10))
 
         # Checkbox for descending order
         ttk.Checkbutton(control_frame, text="Right to Left", variable=self.desc_order, command=self.reorder_images).pack(side=tk.LEFT)
 
         # Stitch Images button
-        stitch_button = ttk.Button(main_frame, text="Stitch Images", style='ButtonNo2.TButton', command=self.stitch_images)
+        stitch_button = ttk.Button(main_frame, text="Stitch images", style='ButtonNo2.TButton', command=self.stitch_images)
         stitch_button.pack(fill="x", padx=width//4, pady=10)
 
         # Pack Images to digital button
-        stitch_button = ttk.Button(main_frame, text="Pack FFOutput", style='ButtonNo3.TButton', command=self.pack_FFOutput)
+        stitch_button = ttk.Button(main_frame, text="Pack to digital", style='ButtonNo3.TButton', command=self.pack_FFOutput)
         stitch_button.pack(fill="x", padx=width//4, pady=10)
 
         # Clear Images button
-        clear_button = ttk.Button(main_frame, text="Clear Images", style='ButtonNo4.TButton', command=self.clear_images)
+        clear_button = ttk.Button(main_frame, text="Clean up", style='ButtonNo4.TButton', command=self.clear_images)
         clear_button.pack(fill="x", padx=width//4, pady=10)
 
     def drop_images(self, event):
