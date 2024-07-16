@@ -51,20 +51,20 @@ class ImageStitcherApp:
         style.theme_use('clam')
 
         # Styple for ButtonNo1
-        style.configure('ButtonNo1.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#5fa8cc')
-        style.map('ButtonNo1.TButton',background=[('active','#81001E')])
+        style.configure('ButtonNo1.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#000000')
+        style.map('ButtonNo1.TButton', foreground=[('active','#000000')], background=[('active','#FFA500')])
 
         # Styple for ButtonNo2
-        style.configure('ButtonNo2.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#449a7f')
-        style.map('ButtonNo2.TButton',background=[('active','#81001E')])
+        style.configure('ButtonNo2.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#000000')
+        style.map('ButtonNo2.TButton', foreground=[('active','#000000')], background=[('active','#FFA500')])
 
         # Styple for ButtonNo3
-        style.configure('ButtonNo3.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#266047')
-        style.map('ButtonNo3.TButton',background=[('active','#81001E')])
+        style.configure('ButtonNo3.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#000000')
+        style.map('ButtonNo3.TButton', foreground=[('active','#000000')], background=[('active','#FFA500')])
 
         # Styple for ButtonNo4
-        style.configure('ButtonNo4.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#10411a')
-        style.map('ButtonNo4.TButton',background=[('active','#81001E')])
+        style.configure('ButtonNo4.TButton',foreground='#FFFFFF', font=('Helvetica', 12, 'bold'), background='#81001E')
+        style.map('ButtonNo4.TButton', foreground=[('active','#000000')], background=[('active','#FFA500')])
 
         # Frame for Add Images button and checkbox
         control_frame = ttk.Frame(main_frame)
