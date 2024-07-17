@@ -72,10 +72,6 @@ class EpubFrame(ttk.Frame):
         top_frame.pack_propagate(False)
         top_frame.pack(side=tk.TOP, fill="x")
 
-        # Drop hint label
-        # self.drop_label = ttk.Label(top_frame, text="Drag and drop EPUB file here")
-        #self.drop_label.pack(expand=True)
-
         # Select EPUB File button
         select_button = ttk.Button(top_frame, text="Select EPUB", style='ButtonNo1.TButton', command=self.select_epub)
         select_button.place(relx=0.5, rely=0.5, anchor='center')
@@ -152,8 +148,6 @@ class EpubFrame(ttk.Frame):
                 rgb_img.save(new_filepath, 'JPEG', quality=95)
         elif file_info.filename.lower().endswith('.jpeg'):
             os.rename(new_filepath, new_filepath.replace('.jpeg', '.jpg'))
-
-# ... (继续 EpubFrame 类)
 
     def auto_img_stitch(self):
         resolution = self.get_image_resolution(OUTPUT_DIR)
@@ -302,8 +296,6 @@ class ImageStitcherFrame(ttk.Frame):
         # Enable drag and drop
         self.drop_target_register(DND_FILES)
         self.dnd_bind('<<Drop>>', self.drop_images)
-
-# ... (继续 ImageStitcherFrame 类)
 
     def drop_images(self, event):
         paths = self.tk.splitlist(event.data)
