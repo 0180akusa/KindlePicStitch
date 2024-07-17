@@ -8,7 +8,7 @@ from tkinter import ttk, filedialog, messagebox
 from tkinterdnd2 import TkinterDnD, DND_FILES
 from PIL import Image, ImageTk
 import re
-from skimage.metrics import structural_similarity as ssim
+from skimage.metrics._structural_similarity import structural_similarity as ssim
 
 OUTPUT_DIR = r"D:\FFOutput"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
