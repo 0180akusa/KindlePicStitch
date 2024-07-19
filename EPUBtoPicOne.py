@@ -11,7 +11,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 class OptimizedApp(TkinterDnD.Tk):
     def __init__(self):
         super().__init__()
-        self.title("EPUB and Image Stitching Tool")
+        self.title("EPUB to JPG Stitch Tool")
         self.geometry("400x750")  # 增加窗口高度
         self.resizable(False, False)
 
@@ -48,17 +48,17 @@ class CombinedFrame(ttk.Frame):
         self.epub_frame.pack_propagate(False)
 
         # 在这里存储初始的提示文字，以便后续重置使用
-        self.initial_epub_text = "拖放EPUB文件到这里"
-        self.initial_image_text = "拖放图片文件到这里（最多2张）"
+        self.initial_epub_text = "Import the *.epub here"
+        self.initial_image_text = "Import two *.jpg's here"
 
         self.epub_label = ttk.Label(self.epub_frame, text=self.initial_epub_text, anchor="center", font=('Helvetica', 12))
         self.epub_label.pack(expand=True)
 
-        self.epub_status_label = ttk.Label(self, text="未导入EPUB文件")
+        self.epub_status_label = ttk.Label(self, text="EPUB not imported")
         self.epub_status_label.pack(fill="x", padx=10, pady=5)
 
         # EPUB处理按钮
-        self.process_epub_button = ttk.Button(self, text="处理EPUB", style='ButtonNo1.TButton', command=self.process_epub)
+        self.process_epub_button = ttk.Button(self, text="Process EPUB", style='ButtonNo1.TButton', command=self.process_epub)
         self.process_epub_button.pack(fill="x", padx=100, pady=5)
 
         # 图片预览区域
@@ -74,28 +74,29 @@ class CombinedFrame(ttk.Frame):
         self.image_label = ttk.Label(self.image_frame, text=self.initial_image_text, anchor="center", font=('Helvetica', 12))
         self.image_label.pack(expand=True)
 
-        self.image_status_label = ttk.Label(self, text="未导入图片")
+        self.image_status_label = ttk.Label(self, text="Images not imported")
         self.image_status_label.pack(fill="x", padx=10, pady=5)
 
         # 图片处理控件
         control_frame = ttk.Frame(self)
         control_frame.pack(fill="x", pady=5)
 
-        ttk.Checkbutton(control_frame, text="从右到左", variable=self.desc_order,
+        ttk.Checkbutton(control_frame, text="From right to left", variable=self.desc_order,
                         command=self.reorder_images).pack(side=tk.LEFT, padx=(100, 10))
 
-        self.stitch_button = ttk.Button(control_frame, text="拼接图片", style='ButtonNo2.TButton', command=self.stitch_images)
+        self.stitch_button = ttk.Button(control_frame, text="Splice images", style='ButtonNo2.TButton', command=self.stitch_images)
         self.stitch_button.pack(side=tk.LEFT)
 
         # 通用功能按钮
         button_frame = ttk.Frame(self)
         button_frame.pack(fill="x", pady=10)
 
-        self.pack_button = ttk.Button(button_frame, text="打包到digital", style='ButtonNo3.TButton', command=self.pack_to_digital)
-        self.pack_button.pack(side=tk.LEFT, expand=True, fill="x", padx=(100, 5))
+        self.clear_button = ttk.Button(button_frame, text="Clear", style='ButtonNo4.TButton', command=self.clear_all)
+        self.clear_button.pack(side=tk.LEFT, expand=True, fill="x", padx=(50, 5))
 
-        self.clear_button = ttk.Button(button_frame, text="清理", style='ButtonNo4.TButton', command=self.clear_all)
-        self.clear_button.pack(side=tk.LEFT, expand=True, fill="x", padx=(5, 100))
+        self.pack_button = ttk.Button(button_frame, text="Pack to digital", style='ButtonNo3.TButton', command=self.pack_to_digital)
+        self.pack_button.pack(side=tk.LEFT, expand=True, fill="x", padx=(5, 50))
+
 
         # 启用拖放功能
         self.epub_frame.drop_target_register(DND_FILES)
@@ -109,9 +110,9 @@ class CombinedFrame(ttk.Frame):
         if file_path.lower().endswith('.epub'):
             self.epub_file = os.path.normpath(file_path)
             self.epub_status_label.config(text=f"已导入: {os.path.basename(self.epub_file)}")
-            self.epub_label.config(text="EPUB文件已导入")
+            self.epub_label.config(text="EPUB imported")
         else:
-            messagebox.showerror("错误", "请拖放EPUB文件")
+            messagebox.showerror("ERROR", "Please import EPUB here.")
 
     def drop_images(self, event):
         paths = self.tk.splitlist(event.data)
@@ -128,7 +129,7 @@ class CombinedFrame(ttk.Frame):
             self.update_image_status()
             self.show_images()  # 添加这行来显示预览
         else:
-            messagebox.showinfo("图片数量已达上限", "最多只能添加2张图片")
+            messagebox.showinfo("maximum of images reached", "maximum of 2 images")
     
     def show_images(self):
         for widget in self.preview_frame.winfo_children():
@@ -147,12 +148,12 @@ class CombinedFrame(ttk.Frame):
 
     def update_image_status(self):
         if not self.image_paths:
-            self.image_status_label.config(text="未导入图片")
+            self.image_status_label.config(text="0 image imported")
             self.image_label.config(text=self.initial_image_text)  # 当没有图片时重置文字
         elif len(self.image_paths) == 1:
-            self.image_status_label.config(text="已导入1张图片")
+            self.image_status_label.config(text="1 image imported")
         else:
-            self.image_status_label.config(text="已导入2张图片")
+            self.image_status_label.config(text="2 images imported")
 
     def reorder_images(self):
         if len(self.image_paths) == 2:
@@ -167,7 +168,7 @@ class CombinedFrame(ttk.Frame):
 
     def process_epub(self):
         if not self.epub_file:
-            messagebox.showerror("错误", "未导入EPUB文件")
+            messagebox.showerror("ERROR", "no EPUB imported")
             return
 
         try:
@@ -185,12 +186,12 @@ class CombinedFrame(ttk.Frame):
                             self.process_image(zip_ref, file_info, images_folder)
 
             os.remove(zip_file)
-            messagebox.showinfo("完成", "EPUB处理完成")
+            messagebox.showinfo("Completed", "EPUB Processed")
             self.epub_label.config(text=self.initial_epub_text)  # 处理完成后重置文字
             self.epub_file = None  # 清除已处理的文件
-            self.epub_status_label.config(text="未导入EPUB文件")
+            self.epub_status_label.config(text="no EPUB imported")
         except Exception as e:
-            messagebox.showerror("错误", f"处理EPUB文件时出错: {e}")
+            messagebox.showerror("ERROR", f"Error processing EPUB file: {e}")
 
     def process_image(self, zip_ref, file_info, images_folder):
         original_filename = file_info.filename.replace(images_folder, '')
@@ -211,7 +212,7 @@ class CombinedFrame(ttk.Frame):
 
     def stitch_images(self):
         if len(self.image_paths) != 2:
-            messagebox.showerror("错误", "请添加2张图片后再进行拼接")
+            messagebox.showerror("ERROR", "Please add 2 images before stitching!")
             return
 
         try:
@@ -243,7 +244,7 @@ class CombinedFrame(ttk.Frame):
             # messagebox.showinfo("完成", "图片拼接完成")
             self.clear_images()
         except Exception as e:
-            messagebox.showerror("错误", f"拼接图片时出错: {e}")
+            messagebox.showerror("ERROR", f"Error while stitching images: {e}")
 
     def pack_to_digital(self):
         target_dir = os.path.join(OUTPUT_DIR, "digital")
@@ -254,7 +255,7 @@ class CombinedFrame(ttk.Frame):
             if source_item != target_dir:
                 shutil.move(source_item, os.path.join(target_dir, item))
 
-        messagebox.showinfo("完成", f"所有文件已移动到 {target_dir}")
+        messagebox.showinfo("Completed", f"All files moved {target_dir}")
 
     def clear_images(self):
         self.image_paths = []
@@ -264,7 +265,7 @@ class CombinedFrame(ttk.Frame):
 
     def clear_all(self):
         self.epub_file = None
-        self.epub_status_label.config(text="未导入EPUB文件")
+        self.epub_status_label.config(text="no EPUB imported")
         self.epub_label.config(text=self.initial_epub_text)  # 重置EPUB拖入区域文字
         self.image_paths = []
         self.update_image_status()

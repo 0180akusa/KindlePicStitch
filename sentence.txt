@@ -3,8 +3,4 @@ pyinstaller --onefile --windowed EPUBtoJPG.py
 # 修改spec后
 pyinstaller EPUBtoJPG.spec
 # 含特殊包
-pyinstaller --additional-hooks-dir=. --onefile --windowed EPUBtoPicPlus.py
-# 2 hook-numpy
-pyinstaller --additional-hooks-dir=. --hidden-import=numpy.f2py --hidden-import=scipy --hidden-import=scipy.special.cython_special --onefile --windowed EPUBtoPicPlus.py
-# 3 hook-skimage
-pyinstaller --additional-hooks-dir=. --hidden-import=numpy --hidden-import=numpy.f2py --hidden-import=scipy --hidden-import=scipy.ndimage --hidden-import=skimage --hidden-import=skimage.metrics --collect-all numpy --collect-all scipy --collect-all skimage --noupx --onefile --windowed EPUBtoPicPlus.py
+pyinstaller --additional-hooks-dir=. --onefile --windowed EPUBtoPicOne.py
