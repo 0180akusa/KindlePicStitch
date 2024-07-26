@@ -1,5 +1,6 @@
 import os
 import shutil
+import csv
 from PIL import Image
 import numpy as np
 
@@ -28,7 +29,7 @@ def compare_edges(img1, img2, edge_width=5, threshold=500):
     print(f"MSE between edges: {error}")
     print(f"Threshold: {threshold}")
 
-    return error < threshold
+    return error, error < threshold
 
 def join_images(img1, img2):
     if img1.size[1] != img2.size[1]:
@@ -51,37 +52,50 @@ def process_images(input_dir, output_dir):
 
     print(f"Found {len(images)} images to process")
 
-    for i in range(0, len(images) - 1, 2):
-        if i + 1 >= len(images):
-            print(f"No pair for {images[i]}, processing complete.")
-            break
+    # Create CSV file for results
+    csv_path = os.path.join(input_dir, 'comparison_results.csv')
+    with open(csv_path, 'w', newline='') as csvfile:
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow(['Image 1', 'Image 2', 'Similarity Score'])
 
-        img1_path = os.path.join(input_dir, images[i])
-        img2_path = os.path.join(input_dir, images[i + 1])
+        for i in range(0, len(images) - 1, 2):
+            if i + 1 >= len(images):
+                print(f"No pair for {images[i]}, processing complete.")
+                break
 
-        print(f"\nComparing images: {images[i]} and {images[i + 1]}")
+            img1_path = os.path.join(input_dir, images[i])
+            img2_path = os.path.join(input_dir, images[i + 1])
 
-        img1 = Image.open(img1_path)
-        img2 = Image.open(img2_path)
+            print(f"\nComparing images: {images[i]} and {images[i + 1]}")
 
-        print(f"Image 1 size: {img1.size}, Image 2 size: {img2.size}")
+            img1 = Image.open(img1_path)
+            img2 = Image.open(img2_path)
 
-        if compare_edges(img1, img2):
-            new_filename = f"{images[i][:-4]}-{images[i + 1][:-4]}.jpg"
-            print(f"Match found: {new_filename}")
+            print(f"Image 1 size: {img1.size}, Image 2 size: {img2.size}")
 
-            joined_image = join_images(img1, img2)
+            error, is_match = compare_edges(img1, img2)
+            
+            # Write comparison result to CSV
+            csvwriter.writerow([images[i], images[i + 1], error])
 
-            joined_image_path = os.path.join(input_dir, new_filename)
-            joined_image.save(joined_image_path)
-            print(f"Saved joined image: {joined_image_path}")
+            if is_match:
+                new_filename = f"{images[i][:-4]}-{images[i + 1][:-4]}.jpg"
+                print(f"Match found: {new_filename}")
 
-            # 移动原始图片到Stitched文件夹
-            shutil.move(img1_path, os.path.join(output_dir, images[i]))
-            shutil.move(img2_path, os.path.join(output_dir, images[i + 1]))
-            print(f"Moved {images[i]} and {images[i + 1]} to {output_dir}")
-        else:
-            print("No match found")
+                joined_image = join_images(img1, img2)
+
+                joined_image_path = os.path.join(input_dir, new_filename)
+                joined_image.save(joined_image_path)
+                print(f"Saved joined image: {joined_image_path}")
+
+                # Move original images to Stitched folder
+                shutil.move(img1_path, os.path.join(output_dir, images[i]))
+                shutil.move(img2_path, os.path.join(output_dir, images[i + 1]))
+                print(f"Moved {images[i]} and {images[i + 1]} to {output_dir}")
+            else:
+                print("No match found")
+
+    print(f"Comparison results saved to {csv_path}")
 
 if __name__ == "__main__":
     input_directory = r"D:\FFOutput"
