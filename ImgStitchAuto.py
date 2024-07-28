@@ -8,7 +8,7 @@ def mse(imageA, imageB):
     err /= float(imageA.shape[0] * imageA.shape[1])
     return err
 
-def compare_edges(img1, img2, edge_width=5, threshold=500):
+def compare_edges(img1, img2, edge_width=5, threshold=50):
     img1_gray = img1.convert('L')
     img2_gray = img2.convert('L')
 
